@@ -70,7 +70,13 @@ async function createSession(userId) {
 
 async function getSession(token) {
   return db.get(
-    `SELECT sessions.token, sessions.user_id, sessions.expires_at, users.name, users.email, users.created_at
+    `SELECT
+       sessions.token,
+       sessions.user_id,
+       sessions.expires_at,
+       users.name,
+       users.email,
+       users.created_at AS user_created_at
      FROM sessions
      JOIN users ON users.id = sessions.user_id
      WHERE sessions.token = ? AND sessions.expires_at > ?`,
@@ -105,7 +111,7 @@ async function authMiddleware(req, res, next) {
       id: session.user_id,
       name: session.name,
       email: session.email,
-      createdAt: session.created_at
+      createdAt: session.user_created_at
     };
     req.sessionToken = token;
     next();
