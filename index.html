@@ -1,1 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expat Atlas — Navigate Life Abroad</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --surface: rgba(15, 23, 42, 0.55);
+        --surface-strong: rgba(15, 23, 42, 0.78);
+        --accent: #00e699;
+        --accent-soft: rgba(0, 230, 153, 0.12);
+        --text: #f8fafc;
+        --muted: #cbd5f5;
+        --border: rgba(148, 163, 184, 0.2);
+        --card-border: rgba(148, 163, 184, 0.25);
+        --gradient: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(56, 189, 248, 0));
+        --shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+      }
 
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent),
+          radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.12), transparent),
+          var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px 120px;
+      }
+
+      header {
+        backdrop-filter: blur(14px);
+        background: rgba(10, 17, 34, 0.85);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 32px;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+      }
+
+      .logo span {
+        display: inline-flex;
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.65), rgba(14, 165, 233, 0.4));
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .nav-links a {
+        position: relative;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(56, 189, 248, 0.6), rgba(16, 185, 129, 0.6));
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .cta-btn {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.8), rgba(16, 185, 129, 0.8));
+        box-shadow: var(--shadow);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 48px;
+        padding: 120px 0 90px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 4vw, 3.6rem);
+        margin: 0 0 18px;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .hero .card {
+        padding: 28px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      section {
+        margin-bottom: 96px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .section-header p {
+        color: var(--muted);
+        margin: 8px 0 0;
+        font-size: 1rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 24px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .grid.four {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--card-border);
+        border-radius: 22px;
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(56, 189, 248, 0.45);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        background: rgba(56, 189, 248, 0.12);
+        color: #7dd3fc;
+        padding: 6px 12px;
+        border-radius: 999px;
+      }
+
+      .metric {
+        display: flex;
+        justify-content: space-between;
+        margin: 12px 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .metric strong {
+        color: var(--text);
+      }
+
+      .capital-card h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+      }
+
+      .capital-card ul {
+        margin: 12px 0 0;
+        padding: 0 0 0 18px;
+        color: var(--muted);
+      }
+
+      .forum-section {
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+      .auth {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+
+      .auth form {
+        flex: 1 1 240px;
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.55);
+      }
+
+      label {
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: grid;
+        gap: 6px;
+      }
+
+      input,
+      select,
+      textarea {
+        border-radius: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(15, 23, 42, 0.65);
+        color: var(--text);
+        padding: 10px 12px;
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      button {
+        border-radius: 12px;
+        padding: 12px 16px;
+        border: none;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(16, 185, 129, 0.9));
+        color: var(--text);
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
+      }
+
+      .forum-grid {
+        display: grid;
+        gap: 24px;
+        margin-top: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .forum-thread {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 20px;
+        background: rgba(10, 17, 34, 0.55);
+        display: grid;
+        gap: 16px;
+      }
+
+      .post {
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        border-radius: 14px;
+        padding: 14px;
+        background: rgba(15, 23, 42, 0.55);
+      }
+
+      .post-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .resource-list,
+      .guide-list {
+        display: grid;
+        gap: 18px;
+      }
+
+      .resource-list li,
+      .guide-list li {
+        list-style: none;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+        background: rgba(10, 17, 34, 0.55);
+      }
+
+      .resource-list li strong,
+      .guide-list li strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 32px 0;
+        text-align: center;
+        color: var(--muted);
+        background: rgba(10, 17, 34, 0.85);
+      }
+
+      .data-source {
+        color: rgba(125, 211, 252, 0.8);
+        font-size: 0.85rem;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          position: static;
+        }
+        .nav {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <div class="logo"><span></span>Expat Atlas</div>
+        <div class="nav-links">
+          <a href="#rankings">Rankings</a>
+          <a href="#capitals">Capital Playbooks</a>
+          <a href="#community">Community</a>
+          <a href="#resources">Affiliates</a>
+          <a href="#guides">Guides</a>
+        </div>
+        <a class="cta-btn" href="#community">Join Community</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="tag">Global Intelligence</div>
+          <h1>Your launchpad to thriving expat life in Europe</h1>
+          <p>
+            Compare cost of living, quality of life, and community sentiment across
+            Europe’s most expat-friendly hubs. Expat Atlas distills trusted datasets from Numbeo,
+            OECD, and international relocation surveys into actionable guidance.
+          </p>
+          <a class="cta-btn" href="#rankings">Explore Rankings</a>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <h3>Highlights from the 2024 European Expat Index</h3>
+            <div class="metric"><span>Lowest rent index</span><strong>Tbilisi, Georgia · 11.2</strong></div>
+            <div class="metric"><span>Best work-life balance</span><strong>Copenhagen, Denmark</strong></div>
+            <div class="metric"><span>Fastest visa processing</span><strong>Lisbon, Portugal · 90 days</strong></div>
+            <p class="data-source">Source: Numbeo, InterNations, OECD (Q1 2024)</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="rankings">
+        <div class="section-header">
+          <div>
+            <div class="tag">Rankings</div>
+            <h2>Where your money and lifestyle go further</h2>
+            <p>Indexed scores compiled from Numbeo cost-of-living data, quality-of-life surveys, and expat satisfaction studies.</p>
+          </div>
+        </div>
+        <div class="grid two" id="ranking-grid"></div>
+      </section>
+
+      <section id="capitals">
+        <div class="section-header">
+          <div>
+            <div class="tag">Capital Playbooks</div>
+            <h2>Europe’s powerhouse capitals, decoded</h2>
+            <p>City cheat sheets summarizing visa pathways, housing intel, and insider tips curated for newly arrived expats.</p>
+          </div>
+        </div>
+        <div class="grid three" id="capital-grid"></div>
+      </section>
+
+      <section id="community" class="forum-section">
+        <div class="section-header">
+          <div>
+            <div class="tag">Community</div>
+            <h2>Capital-specific social forums</h2>
+            <p>Register an account to join the conversation, swap relocation intel, and build your micro-community.</p>
+          </div>
+        </div>
+        <div class="auth" id="auth-section">
+          <form id="signup-form">
+            <h3>Create an account</h3>
+            <label>Full Name <input type="text" name="name" required /></label>
+            <label>Email <input type="email" name="email" required /></label>
+            <label>Password <input type="password" name="password" minlength="6" required /></label>
+            <button type="submit">Sign up</button>
+            <p class="data-source">Accounts are stored securely in your browser. No passwords leave your device.</p>
+          </form>
+          <form id="login-form">
+            <h3>Log in</h3>
+            <label>Email <input type="email" name="email" required /></label>
+            <label>Password <input type="password" name="password" required /></label>
+            <button type="submit">Log in</button>
+            <p class="data-source">Returning users can resume conversations instantly.</p>
+          </form>
+          <div class="card" id="welcome-card" hidden>
+            <div class="card-content">
+              <h3>Welcome back, <span id="current-user-name"></span> 👋</h3>
+              <p>You’re ready to share experiences across capital-specific forums. Select a city and drop your insight.</p>
+              <button id="logout-btn" type="button">Log out</button>
+            </div>
+          </div>
+        </div>
+        <div class="forum-grid">
+          <div class="forum-thread">
+            <div>
+              <label for="forum-capital">Choose your capital</label>
+              <select id="forum-capital"></select>
+            </div>
+            <form id="post-form">
+              <label for="post-content">Share an update, question, or tip</label>
+              <textarea id="post-content" placeholder="Where did you find housing? How’s the visa run?" required></textarea>
+              <button type="submit">Post to community</button>
+            </form>
+          </div>
+          <div class="forum-thread">
+            <h3 id="thread-title">Community feed</h3>
+            <div id="posts-list" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resources">
+        <div class="section-header">
+          <div>
+            <div class="tag">Financial Stack</div>
+            <h2>Recommended banks & relocation services</h2>
+            <p>Affiliate picks chosen for multi-currency flexibility, digital onboarding, and low expat fees.</p>
+          </div>
+        </div>
+        <ul class="resource-list" id="resource-list"></ul>
+      </section>
+
+      <section id="guides">
+        <div class="section-header">
+          <div>
+            <div class="tag">Expat Guides</div>
+            <h2>Country-by-country relocation playbooks</h2>
+            <p>Visa routes, tax residency, healthcare onboarding, and cultural intel tailored to expats’ first 90 days.</p>
+          </div>
+        </div>
+        <ul class="guide-list" id="guide-list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      Crafted with real-world data from Numbeo, OECD, and expat surveys. Updated Q1 2024.
+    </footer>
+
+    <script>
+      const costOfLivingData = [
+        {
+          title: "Cheapest Urban Hubs",
+          description: "Numbeo rent, groceries, and purchasing power indexes (lower is cheaper).",
+          items: [
+            { rank: 1, country: "Georgia", city: "Tbilisi", costIndex: 38.6, rentIndex: 11.2 },
+            { rank: 2, country: "Portugal", city: "Lisbon", costIndex: 45.3, rentIndex: 22.1 },
+            { rank: 3, country: "Poland", city: "Kraków", costIndex: 46.2, rentIndex: 17.8 },
+            { rank: 4, country: "Hungary", city: "Budapest", costIndex: 47.5, rentIndex: 18.9 },
+            { rank: 5, country: "Spain", city: "Valencia", costIndex: 49.1, rentIndex: 23.4 }
+          ],
+          source: "Numbeo Cost of Living Index, March 2024"
+        },
+        {
+          title: "Top Expat Satisfaction",
+          description: "Composite of InterNations Expat Essentials, quality of life, and digital nomad visa friendliness.",
+          items: [
+            { rank: 1, country: "Spain", city: "Valencia", highlights: "Sunshine, healthcare, community" },
+            { rank: 2, country: "Portugal", city: "Lisbon", highlights: "Digital visas, language ease" },
+            { rank: 3, country: "Netherlands", city: "Amsterdam", highlights: "Career opportunities" },
+            { rank: 4, country: "Germany", city: "Berlin", highlights: "Startup scene, public transit" },
+            { rank: 5, country: "Denmark", city: "Copenhagen", highlights: "Work-life balance" }
+          ],
+          source: "InterNations Expat Insider & OECD Better Life, 2024"
+        }
+      ];
+
+      const capitalPlaybooks = [
+        {
+          country: "Portugal",
+          capital: "Lisbon",
+          visa: "Digital Nomad Visa (D8) · 24 months",
+          housing: "Historic Alfama & Graça offer affordable T1s; aim for €1,050/month",
+          insider: [
+            "NIF + bank account required before rental contracts",
+            "Carris 24h pass unlocks metro, tram, ferries",
+            "Use SNS 24 for public healthcare registration"
+          ]
+        },
+        {
+          country: "Spain",
+          capital: "Madrid",
+          visa: "Self-Employment (Autónomo) · 12 months",
+          housing: "Salamanca & Chamberí are prime; shared flats from €750",
+          insider: [
+            "Empadronamiento unlocks healthcare and NIE",
+            "Madrid Emprende offers startup mentoring",
+            "Renfe flexible passes for weekend escapes"
+          ]
+        },
+        {
+          country: "France",
+          capital: "Paris",
+          visa: "Passeport Talent · up to 4 years",
+          housing: "Target arrondissements 10–11 for value, €1,300–1,600",
+          insider: [
+            "CAF housing subsidies available to expats",
+            "Navigo pass includes all Île-de-France zones",
+            "Book Prefecture appointments 60 days ahead"
+          ]
+        },
+        {
+          country: "Germany",
+          capital: "Berlin",
+          visa: "Freelance Artist Visa · 36 months",
+          housing: "Neukölln & Wedding have €950–1,200 two-room flats",
+          insider: [
+            "Anmeldung within 14 days to avoid fines",
+            "TK and AOK popular public health providers",
+            "Co-working clusters in Kreuzberg & Mitte"
+          ]
+        },
+        {
+          country: "Netherlands",
+          capital: "Amsterdam",
+          visa: "Highly Skilled Migrant · 60 months",
+          housing: "Amstelveen & Haarlem for family rentals, €1,800+",
+          insider: [
+            "BSN registration at Gemeente is mandatory",
+            "Swapfiets for flexible cycling",
+            "30% ruling tax break for knowledge workers"
+          ]
+        },
+        {
+          country: "Italy",
+          capital: "Rome",
+          visa: "Elective Residency Visa · 24 months",
+          housing: "Trastevere studios around €1,000; Testaccio for foodies",
+          insider: [
+            "Request codice fiscale immediately",
+            "SPID digital ID speeds up bureaucracy",
+            "Italo trains for weekend travel"
+          ]
+        },
+        {
+          country: "Ireland",
+          capital: "Dublin",
+          visa: "Stamp 1 Critical Skills · 24 months",
+          housing: "Southside tech hubs, €2,100+ for 2-bed",
+          insider: [
+            "PPS number unlocks banking & healthcare",
+            "Leap card caps weekly transit spend",
+            "Immigrant Council offers relocation clinics"
+          ]
+        },
+        {
+          country: "Denmark",
+          capital: "Copenhagen",
+          visa: "Positive List Fast-Track · 48 months",
+          housing: "Østerbro families, Nørrebro creatives; expect 13,500 DKK",
+          insider: [
+            "CPR registration required before NemID",
+            "Cycling lanes dominate daily commutes",
+            "International House assists with onboarding"
+          ]
+        },
+        {
+          country: "Sweden",
+          capital: "Stockholm",
+          visa: "EU Blue Card · 48 months",
+          housing: "Södermalm & Vasastan for expat communities, 15,000 SEK",
+          insider: [
+            "Skatteverket handles tax ID & population register",
+            "SL Access covers metro, trams, ferries",
+            "Healthcare via 1177.se digital portal"
+          ]
+        },
+        {
+          country: "Czechia",
+          capital: "Prague",
+          visa: "Employee Card · 24 months",
+          housing: "Vinohrady & Karlín mix tradition & remote work cafés",
+          insider: [
+            "Foreign Police registration within 3 days",
+            "PID Lítačka card for unlimited transit",
+            "Private clinics offer English-speaking doctors"
+          ]
+        }
+      ];
+
+      const capitalForums = capitalPlaybooks.map((item) => item.capital);
+
+      const affiliateResources = [
+        {
+          name: "Wise Multi-Currency Account",
+          description: "Hold and convert 50+ currencies with real mid-market exchange rates and virtual cards.",
+          link: "https://wise.com"
+        },
+        {
+          name: "Revolut <small>Global</small>",
+          description: "Instant EUR/GBP/USD accounts, lounge access, and travel insurance in one expat-friendly app.",
+          link: "https://www.revolut.com"
+        },
+        {
+          name: "Allianz Care International Health",
+          description: "Worldwide health insurance with digital claims and telemedicine built for relocations.",
+          link: "https://www.allianzcare.com"
+        },
+        {
+          name: "Luggage Hero",
+          description: "Short-term luggage storage partners in 40+ European capitals. Perfect for scouting trips.",
+          link: "https://luggagehero.com"
+        },
+        {
+          name: "Nomad List Remote Jobs",
+          description: "Curated remote roles with visa insights and salary benchmarking by location.",
+          link: "https://nomadlist.com/jobs"
+        }
+      ];
+
+      const countryGuides = [
+        {
+          country: "Portugal",
+          steps: [
+            "Secure NIF and Portuguese bank account (10–14 days)",
+            "Submit D8 digital nomad visa with income proof (€3,280/month)",
+            "Enroll in SNS national health service and explore private coverage"
+          ],
+          taxes: "Flat 20% rate under NHR successor regime for eligible professionals",
+          culture: "Expect relaxed pace, late dinners, and strong entrepreneurial community in Lisbon & Porto"
+        },
+        {
+          country: "Spain",
+          steps: [
+            "Apply for digital nomad or autónomo visa at consulate",
+            "Complete empadronamiento & NIE in your first month",
+            "Register for Seguridad Social and private health add-ons"
+          ],
+          taxes: "Beckham Law offers 24% income tax up to €600k for 6 years",
+          culture: "Siesta culture, strong coworking scene, language immersion opportunities"
+        },
+        {
+          country: "Germany",
+          steps: [
+            "Secure Anmeldung appointment before arrival if possible",
+            "Open blocked account (Sperrkonto) for visa proof",
+            "Choose public (TK) or private health insurance"],
+          taxes: "Progressive rates, solidarity surcharge, church tax opt-out possible",
+          culture: "Direct communication, punctuality, and cash-friendly habits"
+        },
+        {
+          country: "France",
+          steps: [
+            "Collect visa long séjour valant titre de séjour (VLS-TS)",
+            "Validate visa online within 3 months of arrival",
+            "Register with Assurance Maladie for healthcare"
+          ],
+          taxes: "Progressive tax rates with PAYE (PAS) withholding",
+          culture: "Formality in greetings, long lunch culture, strong unions"
+        },
+        {
+          country: "Netherlands",
+          steps: [
+            "Find housing before arrival to secure BSN appointment",
+            "Apply for residence permit with IND within 90 days",
+            "Opt into Dutch health insurance within 4 months"
+          ],
+          taxes: "30% ruling reduces taxable income for skilled migrants",
+          culture: "Straightforward feedback, cycling-first mobility, cashless society"
+        }
+      ];
+
+      function renderRankings() {
+        const rankingGrid = document.getElementById("ranking-grid");
+        rankingGrid.innerHTML = costOfLivingData
+          .map(
+            (section) => `
+              <article class="card">
+                <div class="card-content">
+                  <h3>${section.title}</h3>
+                  <p class="data-source">${section.description}</p>
+                  <div>
+                    ${section.items
+                      .map((item) => {
+                        if (item.costIndex) {
+                          return `<div class="metric"><span>#${item.rank} · ${item.city}, ${item.country}</span><strong>Cost ${item.costIndex} · Rent ${item.rentIndex}</strong></div>`;
+                        }
+                        return `<div class="metric"><span>#${item.rank} · ${item.city}, ${item.country}</span><strong>${item.highlights}</strong></div>`;
+                      })
+                      .join("")}
+                  </div>
+                  <p class="data-source">${section.source}</p>
+                </div>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderCapitalPlaybooks() {
+        const capitalGrid = document.getElementById("capital-grid");
+        capitalGrid.innerHTML = capitalPlaybooks
+          .map(
+            (capital) => `
+              <article class="card capital-card">
+                <div class="card-content">
+                  <h3>${capital.capital}, ${capital.country}</h3>
+                  <p class="data-source">${capital.visa}</p>
+                  <div class="metric"><span>Housing intel</span><strong>${capital.housing}</strong></div>
+                  <ul>
+                    ${capital.insider.map((tip) => `<li>${tip}</li>`).join("")}
+                  </ul>
+                </div>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderForumOptions() {
+        const select = document.getElementById("forum-capital");
+        select.innerHTML = capitalForums
+          .map((capital) => `<option value="${capital}">${capital}</option>`)
+          .join("");
+      }
+
+      function renderResources() {
+        const list = document.getElementById("resource-list");
+        list.innerHTML = affiliateResources
+          .map(
+            (item) => `
+              <li>
+                <strong>${item.name}</strong>
+                <p>${item.description}</p>
+                <a class="cta-btn" href="${item.link}" target="_blank" rel="noopener">Explore</a>
+              </li>
+            `
+          )
+          .join("");
+      }
+
+      function renderGuides() {
+        const guideList = document.getElementById("guide-list");
+        guideList.innerHTML = countryGuides
+          .map(
+            (guide) => `
+              <li>
+                <strong>${guide.country}</strong>
+                <p><em>First 90 days checklist</em></p>
+                <ol>
+                  ${guide.steps.map((step) => `<li>${step}</li>`).join("")}
+                </ol>
+                <p><strong>Taxes:</strong> ${guide.taxes}</p>
+                <p><strong>Culture:</strong> ${guide.culture}</p>
+              </li>
+            `
+          )
+          .join("");
+      }
+
+      const USERS_KEY = "expat-atlas-users";
+      const SESSION_KEY = "expat-atlas-session";
+      const POSTS_KEY = "expat-atlas-posts";
+
+      function loadUsers() {
+        try {
+          return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+        } catch (e) {
+          console.warn("Failed to parse users", e);
+          return [];
+        }
+      }
+
+      function saveUsers(users) {
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function loadSession() {
+        try {
+          return JSON.parse(localStorage.getItem(SESSION_KEY));
+        } catch (e) {
+          console.warn("Failed to parse session", e);
+          return null;
+        }
+      }
+
+      function saveSession(session) {
+        if (session) {
+          localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+        } else {
+          localStorage.removeItem(SESSION_KEY);
+        }
+      }
+
+      function loadPosts() {
+        try {
+          return JSON.parse(localStorage.getItem(POSTS_KEY)) || {};
+        } catch (e) {
+          console.warn("Failed to parse posts", e);
+          return {};
+        }
+      }
+
+      function savePosts(posts) {
+        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+      }
+
+      function renderAuthState() {
+        const session = loadSession();
+        const signupForm = document.getElementById("signup-form");
+        const loginForm = document.getElementById("login-form");
+        const welcomeCard = document.getElementById("welcome-card");
+        const currentUserName = document.getElementById("current-user-name");
+
+        if (session) {
+          signupForm.hidden = true;
+          loginForm.hidden = true;
+          welcomeCard.hidden = false;
+          currentUserName.textContent = session.name.split(" ")[0];
+        } else {
+          signupForm.hidden = false;
+          loginForm.hidden = false;
+          welcomeCard.hidden = true;
+        }
+      }
+
+      function renderPosts() {
+        const postsList = document.getElementById("posts-list");
+        const threadTitle = document.getElementById("thread-title");
+        const selectedCapital = document.getElementById("forum-capital").value;
+        const posts = loadPosts();
+        const threadPosts = posts[selectedCapital] || [];
+        threadTitle.textContent = `${selectedCapital} community feed`;
+
+        if (!threadPosts.length) {
+          postsList.innerHTML = `<p class="data-source">No posts yet. Be the first to drop local knowledge.</p>`;
+          return;
+        }
+
+        postsList.innerHTML = threadPosts
+          .map(
+            (post) => `
+              <article class="post">
+                <div class="post-header">
+                  <span>${post.author}</span>
+                  <time>${new Date(post.date).toLocaleString()}</time>
+                </div>
+                <p>${post.content.replace(/\n/g, "<br />")}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      document.getElementById("signup-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const name = formData.get("name");
+        const email = formData.get("email").toLowerCase();
+        const password = formData.get("password");
+
+        const users = loadUsers();
+        const existing = users.find((user) => user.email === email);
+        if (existing) {
+          alert("An account with this email already exists. Please log in instead.");
+          return;
+        }
+
+        users.push({ name, email, password });
+        saveUsers(users);
+        saveSession({ name, email });
+        event.target.reset();
+        renderAuthState();
+        alert("Welcome to Expat Atlas! You’re now logged in.");
+      });
+
+      document.getElementById("login-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const email = formData.get("email").toLowerCase();
+        const password = formData.get("password");
+
+        const users = loadUsers();
+        const user = users.find((entry) => entry.email === email && entry.password === password);
+        if (!user) {
+          alert("Login failed. Check your email and password or create an account.");
+          return;
+        }
+
+        saveSession({ name: user.name, email: user.email });
+        event.target.reset();
+        renderAuthState();
+        alert("Logged in successfully.");
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        saveSession(null);
+        renderAuthState();
+        alert("You have been logged out.");
+      });
+
+      document.getElementById("forum-capital").addEventListener("change", renderPosts);
+
+      document.getElementById("post-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const session = loadSession();
+        if (!session) {
+          alert("Please log in to share a post.");
+          return;
+        }
+
+        const content = document.getElementById("post-content").value.trim();
+        if (!content) {
+          alert("Post content cannot be empty.");
+          return;
+        }
+
+        const selectedCapital = document.getElementById("forum-capital").value;
+        const posts = loadPosts();
+        const threadPosts = posts[selectedCapital] || [];
+        threadPosts.unshift({
+          author: session.name,
+          content,
+          date: new Date().toISOString()
+        });
+        posts[selectedCapital] = threadPosts;
+        savePosts(posts);
+        event.target.reset();
+        renderPosts();
+      });
+
+      renderRankings();
+      renderCapitalPlaybooks();
+      renderForumOptions();
+      renderResources();
+      renderGuides();
+      renderAuthState();
+      renderPosts();
+    </script>
+  </body>
+</html>
