@@ -19,17 +19,20 @@
     />
     <style>
       :root {
-        --bg: #0f172a;
-        --surface: rgba(15, 23, 42, 0.55);
-        --surface-strong: rgba(15, 23, 42, 0.78);
-        --accent: #00e699;
-        --accent-soft: rgba(0, 230, 153, 0.12);
-        --text: #f8fafc;
-        --muted: #cbd5f5;
-        --border: rgba(148, 163, 184, 0.2);
-        --card-border: rgba(148, 163, 184, 0.25);
-        --gradient: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(56, 189, 248, 0));
-        --shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+        --bg: #f5f7fb;
+        --surface: #ffffff;
+        --surface-strong: #eef2fc;
+        --surface-soft: #f8faff;
+        --text: #0f172a;
+        --muted: #536281;
+        --muted-soft: #7b8ba8;
+        --accent-sky: #38bdf8;
+        --accent-palm: #10b981;
+        --accent-coral: #f97316;
+        --border: rgba(15, 23, 42, 0.08);
+        --card-border: rgba(15, 23, 42, 0.06);
+        --gradient: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(249, 115, 22, 0.18));
+        --shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
       }
 
       * {
@@ -39,8 +42,7 @@
       body {
         margin: 0;
         font-family: "Inter", sans-serif;
-        background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent),
-          radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.12), transparent),
+        background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, rgba(249, 115, 22, 0.06) 45%, rgba(16, 185, 129, 0.08) 100%),
           var(--bg);
         color: var(--text);
         -webkit-font-smoothing: antialiased;
@@ -57,9 +59,9 @@
       }
 
       header {
-        backdrop-filter: blur(14px);
-        background: rgba(10, 17, 34, 0.85);
-        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.94);
+        border-bottom: 1px solid rgba(15, 23, 42, 0.05);
         position: sticky;
         top: 0;
         z-index: 100;
@@ -88,8 +90,8 @@
         width: 34px;
         height: 34px;
         border-radius: 12px;
-        background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.65), rgba(14, 165, 233, 0.4));
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(249, 115, 22, 0.8));
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       }
 
       .nav-links {
@@ -113,7 +115,7 @@
         bottom: -6px;
         width: 100%;
         height: 2px;
-        background: linear-gradient(90deg, rgba(56, 189, 248, 0.6), rgba(16, 185, 129, 0.6));
+        background: linear-gradient(90deg, rgba(56, 189, 248, 0.9), rgba(16, 185, 129, 0.8));
         transform: scaleX(0);
         transform-origin: center;
         transition: transform 0.2s ease;
@@ -130,13 +132,19 @@
       .cta-btn {
         padding: 10px 18px;
         border-radius: 999px;
-        background: linear-gradient(135deg, rgba(56, 189, 248, 0.8), rgba(16, 185, 129, 0.8));
-        box-shadow: var(--shadow);
-        color: var(--text);
+        background: linear-gradient(135deg, var(--accent-sky), var(--accent-coral));
+        box-shadow: 0 14px 30px rgba(56, 189, 248, 0.25);
+        color: #ffffff;
         text-decoration: none;
         font-weight: 600;
         border: none;
         cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 36px rgba(249, 115, 22, 0.24);
       }
 
       .hero {
@@ -164,7 +172,7 @@
       .hero .card {
         padding: 28px;
         background: var(--surface);
-        border: 1px solid var(--border);
+        border: 1px solid rgba(15, 23, 42, 0.06);
         border-radius: 24px;
         box-shadow: var(--shadow);
       }
@@ -208,6 +216,186 @@
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
+      .city-template__header {
+        gap: 32px;
+        align-items: flex-end;
+      }
+
+      .city-template__actions {
+        display: grid;
+        gap: 8px;
+        align-items: end;
+        justify-items: start;
+        background: rgba(56, 189, 248, 0.12);
+        padding: 12px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+      }
+
+      .city-template__actions label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+      }
+
+      .city-template__actions select {
+        min-width: 220px;
+      }
+
+      .city-template-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .city-hero {
+        grid-column: 1 / -1;
+      }
+
+      .city-hero__badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(249, 115, 22, 0.26));
+        color: #0b1220;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .city-hero__meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .meta-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+      }
+
+      .city-hero__meta strong {
+        font-size: 1.05rem;
+      }
+
+      .financials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px 20px;
+        margin: 0;
+      }
+
+      .financials__item {
+        display: grid;
+        gap: 6px;
+      }
+
+      .financials dt {
+        margin: 0;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .financials dd {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .financial-note {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--muted-soft);
+        margin-top: 4px;
+      }
+
+      .guide-steps {
+        display: grid;
+        gap: 10px;
+        padding-left: 20px;
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .guide-detail {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        background: var(--surface-soft);
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(15, 23, 42, 0.06);
+      }
+
+      .guide-detail p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .recommendations {
+        display: grid;
+        gap: 16px;
+      }
+
+      .recommendation-group {
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 16px;
+        padding: 16px;
+        background: var(--surface-soft);
+        display: grid;
+        gap: 10px;
+      }
+
+      .recommendation-group h4 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .recommendation-group ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .city-feed {
+        list-style: none;
+        margin: 0 0 20px;
+        padding: 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      .city-post {
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 14px;
+        padding: 14px 16px;
+        background: var(--surface-soft);
+      }
+
+      .city-post__meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .city-post__content {
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      .city-feed__cta {
+        width: 100%;
+        text-align: center;
+      }
+
       .card {
         background: var(--surface);
         border: 1px solid var(--card-border);
@@ -215,12 +403,13 @@
         padding: 24px;
         position: relative;
         overflow: hidden;
-        transition: transform 0.25s ease, border-color 0.25s ease;
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       }
 
       .card:hover {
         transform: translateY(-4px);
         border-color: rgba(56, 189, 248, 0.45);
+        box-shadow: 0 20px 36px rgba(56, 189, 248, 0.18);
       }
 
       .card::before {
@@ -248,8 +437,8 @@
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.12em;
-        background: rgba(56, 189, 248, 0.12);
-        color: #7dd3fc;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(16, 185, 129, 0.18));
+        color: var(--text);
         padding: 6px 12px;
         border-radius: 999px;
       }
@@ -279,8 +468,8 @@
       }
 
       .forum-section {
-        background: rgba(15, 23, 42, 0.65);
-        border: 1px solid var(--border);
+        background: var(--surface);
+        border: 1px solid rgba(15, 23, 42, 0.06);
         border-radius: 28px;
         padding: 32px;
         box-shadow: var(--shadow);
@@ -298,9 +487,9 @@
         display: grid;
         gap: 12px;
         padding: 18px;
-        border: 1px solid var(--border);
+        border: 1px solid rgba(15, 23, 42, 0.08);
         border-radius: 16px;
-        background: rgba(15, 23, 42, 0.55);
+        background: var(--surface-soft);
       }
 
       label {
@@ -314,11 +503,12 @@
       select,
       textarea {
         border-radius: 12px;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        background: #ffffff;
         color: var(--text);
         padding: 10px 12px;
         font: inherit;
+        box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
       }
 
       textarea {
@@ -330,8 +520,8 @@
         border-radius: 12px;
         padding: 12px 16px;
         border: none;
-        background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(16, 185, 129, 0.9));
-        color: var(--text);
+        background: linear-gradient(135deg, var(--accent-sky), var(--accent-palm));
+        color: #ffffff;
         font-weight: 600;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -339,7 +529,7 @@
 
       button:hover {
         transform: translateY(-1px);
-        box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
+        box-shadow: 0 12px 24px rgba(16, 185, 129, 0.22);
       }
 
       .forum-grid {
@@ -350,19 +540,19 @@
       }
 
       .forum-thread {
-        border: 1px solid var(--border);
+        border: 1px solid rgba(15, 23, 42, 0.08);
         border-radius: 18px;
         padding: 20px;
-        background: rgba(10, 17, 34, 0.55);
+        background: var(--surface-soft);
         display: grid;
         gap: 16px;
       }
 
       .post {
-        border: 1px solid rgba(148, 163, 184, 0.22);
+        border: 1px solid rgba(15, 23, 42, 0.08);
         border-radius: 14px;
         padding: 14px;
-        background: rgba(15, 23, 42, 0.55);
+        background: #ffffff;
       }
 
       .post-header {
@@ -382,10 +572,10 @@
       .resource-list li,
       .guide-list li {
         list-style: none;
-        border: 1px solid var(--border);
+        border: 1px solid rgba(15, 23, 42, 0.08);
         border-radius: 18px;
         padding: 18px;
-        background: rgba(10, 17, 34, 0.55);
+        background: var(--surface);
       }
 
       .resource-list li strong,
@@ -395,15 +585,15 @@
       }
 
       footer {
-        border-top: 1px solid var(--border);
+        border-top: 1px solid rgba(15, 23, 42, 0.05);
         padding: 32px 0;
         text-align: center;
-        color: var(--muted);
-        background: rgba(10, 17, 34, 0.85);
+        color: var(--muted-soft);
+        background: rgba(255, 255, 255, 0.9);
       }
 
       .data-source {
-        color: rgba(125, 211, 252, 0.8);
+        color: var(--muted-soft);
         font-size: 0.85rem;
         margin-top: 8px;
       }
@@ -458,6 +648,79 @@
             <div class="metric"><span>Fastest visa processing</span><strong>Lisbon, Portugal · 90 days</strong></div>
             <p class="data-source">Source: Numbeo, InterNations, OECD (Q1 2024)</p>
           </div>
+        </div>
+      </section>
+
+      <section id="city-template" class="city-template">
+        <div class="section-header city-template__header">
+          <div>
+            <div class="tag">City Page Template</div>
+            <h2>White-label blueprint for your next expat city deep-dive</h2>
+            <p>Preview a turnkey layout that blends hard financials, relocation guidance, curated recommendations, and community chatter.</p>
+          </div>
+          <div class="city-template__actions">
+            <label for="city-template-select">Preview city</label>
+            <select id="city-template-select"></select>
+          </div>
+        </div>
+        <div class="city-template-grid">
+          <article class="card city-hero" id="city-hero-card">
+            <div class="card-content">
+              <div class="city-hero__badge" id="city-hero-badge">Atlantic gateway</div>
+              <h3 id="city-name">Lisbon, Portugal</h3>
+              <p id="city-tagline">Sun-drenched capital with startup energy and a thriving expat collective.</p>
+              <div class="city-hero__meta">
+                <div>
+                  <span class="meta-label">Population</span>
+                  <strong id="city-population">3.0M metro</strong>
+                </div>
+                <div>
+                  <span class="meta-label">Visa pathway</span>
+                  <strong id="city-visa">Digital Nomad (D8)</strong>
+                </div>
+                <div>
+                  <span class="meta-label">Climate</span>
+                  <strong id="city-climate">Mediterranean · 300 sunny days</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card city-financials">
+            <div class="card-content">
+              <h3>Financial snapshot</h3>
+              <dl class="financials" id="city-financials"></dl>
+              <p class="data-source" id="city-financial-source">Sources: Numbeo, OECD, World Bank</p>
+            </div>
+          </article>
+          <article class="card city-guide">
+            <div class="card-content">
+              <h3>Newcomer checklist</h3>
+              <ol class="guide-steps" id="city-guide-steps"></ol>
+              <div class="guide-detail">
+                <div>
+                  <span class="meta-label">Tax outlook</span>
+                  <p id="city-guide-taxes"></p>
+                </div>
+                <div>
+                  <span class="meta-label">Cultural cues</span>
+                  <p id="city-guide-culture"></p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card city-recos">
+            <div class="card-content">
+              <h3>Neighborhood & lifestyle picks</h3>
+              <div class="recommendations" id="city-recommendations"></div>
+            </div>
+          </article>
+          <article class="card city-forum">
+            <div class="card-content">
+              <h3><span id="city-forum-title">Lisbon Lounge</span> · Community pulse</h3>
+              <ul class="city-feed" id="city-feed"></ul>
+              <button type="button" class="cta-btn city-feed__cta">View full conversation</button>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -702,6 +965,243 @@
         }
       ];
 
+      const cityTemplates = [
+        {
+          id: "lisbon",
+          name: "Lisbon, Portugal",
+          badge: "Atlantic gateway",
+          tagline: "Sun-drenched capital with startup energy and a thriving expat collective.",
+          population: "3.0M metro",
+          visa: "Digital Nomad (D8)",
+          climate: "Mediterranean · 300 sunny days",
+          financialSource: "Sources: Numbeo (May 2024), OECD, SEF",
+          financials: [
+            { label: "Cost of living index", value: "45.9", note: "vs. New York = 100" },
+            { label: "City-centre rent", value: "€1,250 / month", note: "One-bedroom furnished" },
+            { label: "Median tech salary", value: "€39k / year", note: "Mid-level product roles" },
+            { label: "Transit pass", value: "€40", note: "Navegante Metropolitana" },
+            { label: "Healthcare", value: "€60 / month", note: "Private international coverage" },
+            { label: "Income tax", value: "20% flat", note: "NHR successor for remote earners" }
+          ],
+          guide: {
+            steps: [
+              "Secure NIF remotely and open a Portuguese bank account",
+              "Book 30-day stay in Estrela or Alcântara while scouting long-term leases",
+              "Submit D8 visa with €3,280 monthly income proof and health insurance",
+              "Validate visa with SEF appointment and register for SNS healthcare",
+              "Settle into coworking hubs like Second Home or Heden for instant network"
+            ],
+            taxes:
+              "Remote professionals can secure a 20% flat tax for 10 years and exempt foreign dividends under treaty rules.",
+            culture:
+              "Late dinners, collaborative startup meetups, and generous coffee breaks define Lisbon's social rhythm."
+          },
+          recommendations: [
+            {
+              title: "Live",
+              items: [
+                "Príncipe Real · leafy mansions, LGBTQ+ inclusive cafés, Saturday organic market",
+                "Alcântara · loft-style living next to LX Factory creative campus",
+                "Ericeira · surf town commuter base with bilingual international schools"
+              ]
+            },
+            {
+              title: "Work",
+              items: [
+                "Second Home Lisboa · botanical coworking & relocation legal clinics",
+                "Outsite Cais do Sodré · coliving rooms with networking dinners",
+                "Village Underground · shipping-container studios for creatives"
+              ]
+            },
+            {
+              title: "Weekend escapes",
+              items: [
+                "Setúbal Peninsula · dolphin cruises & Moscatel tastings",
+                "Azores islands via 2h flights for volcanic hikes",
+                "Madrid overnight train from Santa Apolónia for culture fix"
+              ]
+            }
+          ],
+          posts: [
+            {
+              author: "Ava — Product Designer",
+              timestamp: "2h ago",
+              content:
+                "SEF biometric appointment done! Bring printed lease, NIF copy, and proof of income. Staff offered English support."
+            },
+            {
+              author: "Mateo — Blockchain Dev",
+              timestamp: "6h ago",
+              content:
+                "Heden Chiado coworking has day passes with pastel de nata + specialty coffee. Thursdays are community pitch nights."
+            },
+            {
+              author: "Sophie — UX Writer",
+              timestamp: "Yesterday",
+              content:
+                "Need a bilingual pediatrician? Clínica Lusíadas in Parque das Nações accepts Cigna & Allianz expat plans."
+            }
+          ],
+          forumTitle: "Lisbon Lounge"
+        },
+        {
+          id: "tallinn",
+          name: "Tallinn, Estonia",
+          badge: "Baltic tech lab",
+          tagline: "Digital-first capital where e-residency meets medieval charm and ice-swim culture.",
+          population: "0.8M metro",
+          visa: "Digital Nomad Visa",
+          climate: "Nordic · snowy winters, mild summers",
+          financialSource: "Sources: Statistics Estonia, Numbeo (May 2024), e-Residency",
+          financials: [
+            { label: "Cost of living index", value: "53.0", note: "vs. New York = 100" },
+            { label: "City-centre rent", value: "€850 / month", note: "One-bedroom in Kalamaja" },
+            { label: "Median tech salary", value: "€48k / year", note: "Software engineer" },
+            { label: "Transit pass", value: "€30", note: "Tallinn residents ride for free after registration" },
+            { label: "Healthcare", value: "€72 / month", note: "Private top-up (Confido)" },
+            { label: "Income tax", value: "20% flat", note: "Corporate tax deferred until distribution" }
+          ],
+          guide: {
+            steps: [
+              "Apply for e-Residency card and open Estonian business account remotely",
+              "Arrive with temporary rental in Kalamaja or Rotermann and register address",
+              "Submit digital nomad visa or startup visa with €4,500 monthly income proof",
+              "Enroll in Estonian Health Insurance Fund (EHIF) via employer or purchase private cover",
+              "Collect Ühiskaart transit card and join sTARTUp Day networking circuits"
+            ],
+            taxes:
+              "Flat 20% personal tax with corporate profits untaxed until distributed keeps cash flow high for founders.",
+            culture:
+              "Expect direct communication, sauna invites after meetings, and tech meetups in century-old factories."
+          },
+          recommendations: [
+            {
+              title: "Live",
+              items: [
+                "Kalamaja · pastel wooden houses, seaside promenades, family-friendly cafés",
+                "Rotermann · loft apartments between glass towers and Michelin dining",
+                "Viimsi Peninsula · coastal villas, international school campus"
+              ]
+            },
+            {
+              title: "Work",
+              items: [
+                "Lift99 · startup hub with investor office hours",
+                "Spring Hub · enterprise-grade coworking with podcast studios",
+                "Tehnopol · science park with accelerator programs"
+              ]
+            },
+            {
+              title: "Recharge",
+              items: [
+                "Sauna ferry to Helsinki for weekend city swap",
+                "Lahemaa National Park hikes and bog walks",
+                "Telliskivi Creative City street food festivals"
+              ]
+            }
+          ],
+          posts: [
+            {
+              author: "Lauri — Founder",
+              timestamp: "Today",
+              content:
+                "If you're registering a company, use the e-Business Register before arrival. Opened an LHV account in 48 hours with e-Residency."
+            },
+            {
+              author: "Anika — UX Researcher",
+              timestamp: "1d ago",
+              content:
+                "Tallinn winter tip: join the Outdoor Chill Facebook group for ice-swimming meetups + thermos tea. Great way to meet locals."
+            },
+            {
+              author: "Miguel — Data Scientist",
+              timestamp: "3d ago",
+              content:
+                "Free public transport once you register your address! Just validate Ühiskaart at kiosks around the city."
+            }
+          ],
+          forumTitle: "Tallinn Tech Circle"
+        },
+        {
+          id: "barcelona",
+          name: "Barcelona, Spain",
+          badge: "Mediterranean metropolis",
+          tagline: "Design-forward city balancing beach life, innovation districts, and Catalan culture.",
+          population: "5.6M metro",
+          visa: "Digital Nomad Visa",
+          climate: "Mediterranean · mild winters",
+          financialSource: "Sources: Ajuntament de Barcelona, Numbeo (May 2024), InterNations",
+          financials: [
+            { label: "Cost of living index", value: "55.3", note: "vs. New York = 100" },
+            { label: "City-centre rent", value: "€1,450 / month", note: "Eixample one-bedroom" },
+            { label: "Median tech salary", value: "€45k / year", note: "Product designer" },
+            { label: "Transit pass", value: "€40", note: "T-usual unlimited metro & tram" },
+            { label: "Healthcare", value: "€65 / month", note: "Adeslas private plan" },
+            { label: "Income tax", value: "24%", note: "Beckham Law for qualified hires" }
+          ],
+          guide: {
+            steps: [
+              "Secure cita previa for empadronamiento before landing",
+              "Book temporary stay in Poblenou or Gràcia while flat-hunting",
+              "Apply for Spain's digital nomad visa or autónomo permit with €2,520 income proof",
+              "Validate NIE, register with Seguridad Social, and open Spanish bank account",
+              "Tap into Pier01 and 22@ district events for networking"
+            ],
+            taxes:
+              "International hires can leverage Beckham Law for a 24% flat rate up to €600k during first 6 years.",
+            culture:
+              "Lunch runs 2-4pm, Catalan phrases earn smiles, and beach volleyball is the default after-work meetup."
+          },
+          recommendations: [
+            {
+              title: "Live",
+              items: [
+                "Gràcia · village vibes, indie cinemas, artisan markets",
+                "Poblenou · loft conversions near 22@ tech district and beaches",
+                "Sarrià-Sant Gervasi · leafy avenues close to international schools"
+              ]
+            },
+            {
+              title: "Work",
+              items: [
+                "Aticco Bogatell · rooftop pool & wellness programs",
+                "Talent Garden · innovation campus with accelerator access",
+                "OneCowork Catedral · quiet pods steps from Gothic Quarter"
+              ]
+            },
+            {
+              title: "Play",
+              items: [
+                "Montserrat hikes and cava tastings",
+                "Costa Brava weekend getaways by RENFE",
+                "Barça match nights in local peñas"
+              ]
+            }
+          ],
+          posts: [
+            {
+              author: "Nina — Brand Strategist",
+              timestamp: "4h ago",
+              content:
+                "For NIE appointments, refresh the government site at 8am sharp. Managed to snag a slot in less than 10 minutes today."
+            },
+            {
+              author: "Jon — Frontend Engineer",
+              timestamp: "1d ago",
+              content:
+                "Pier01 membership grants access to weekly investor office hours and UX critique circles. Worth the waitlist!"
+            },
+            {
+              author: "Hyejin — Illustrator",
+              timestamp: "3d ago",
+              content:
+                "Check Casa Bonay's rooftop Sundays for creative brunch collabs and DJ sets. Lots of expat-friendly networking."
+            }
+          ],
+          forumTitle: "Barcelona Beach Board"
+        }
+      ];
+
       const capitalForums = capitalPlaybooks.map((item) => item.capital);
 
       const affiliateResources = [
@@ -783,6 +1283,78 @@
           culture: "Straightforward feedback, cycling-first mobility, cashless society"
         }
       ];
+
+      function renderCityTemplateOptions() {
+        const select = document.getElementById("city-template-select");
+        select.innerHTML = cityTemplates
+          .map((city) => `<option value="${city.id}">${city.name}</option>`)
+          .join("");
+      }
+
+      function updateCityTemplate(cityId) {
+        const template = cityTemplates.find((city) => city.id === cityId) || cityTemplates[0];
+
+        document.getElementById("city-hero-badge").textContent = template.badge;
+        document.getElementById("city-name").textContent = template.name;
+        document.getElementById("city-tagline").textContent = template.tagline;
+        document.getElementById("city-population").textContent = template.population;
+        document.getElementById("city-visa").textContent = template.visa;
+        document.getElementById("city-climate").textContent = template.climate;
+        document.getElementById("city-forum-title").textContent = template.forumTitle;
+
+        const financialsList = document.getElementById("city-financials");
+        financialsList.innerHTML = template.financials
+          .map(
+            (item) => `
+              <div class="financials__item">
+                <dt>${item.label}</dt>
+                <dd>${item.value}${
+                  item.note ? `<span class="financial-note">${item.note}</span>` : ""
+                }</dd>
+              </div>
+            `
+          )
+          .join("");
+
+        document.getElementById("city-financial-source").textContent = template.financialSource;
+
+        const stepsList = document.getElementById("city-guide-steps");
+        stepsList.innerHTML = template.guide.steps.map((step) => `<li>${step}</li>`).join("");
+        document.getElementById("city-guide-taxes").textContent = template.guide.taxes;
+        document.getElementById("city-guide-culture").textContent = template.guide.culture;
+
+        const recommendationsList = document.getElementById("city-recommendations");
+        recommendationsList.innerHTML = template.recommendations
+          .map(
+            (group) => `
+              <div class="recommendation-group">
+                <h4>${group.title}</h4>
+                <ul>${group.items.map((item) => `<li>${item}</li>`).join("")}</ul>
+              </div>
+            `
+          )
+          .join("");
+
+        const feedList = document.getElementById("city-feed");
+        feedList.innerHTML = template.posts
+          .map(
+            (post) => `
+              <li class="city-post">
+                <div class="city-post__meta">
+                  <span>${post.author}</span>
+                  <time>${post.timestamp}</time>
+                </div>
+                <p class="city-post__content">${post.content}</p>
+              </li>
+            `
+          )
+          .join("");
+
+        const select = document.getElementById("city-template-select");
+        if (select.value !== template.id) {
+          select.value = template.id;
+        }
+      }
 
       function renderRankings() {
         const rankingGrid = document.getElementById("ranking-grid");
@@ -1013,6 +1585,12 @@
         alert("You have been logged out.");
       });
 
+      document
+        .getElementById("city-template-select")
+        .addEventListener("change", (event) => {
+          updateCityTemplate(event.target.value);
+        });
+
       document.getElementById("forum-capital").addEventListener("change", renderPosts);
 
       document.getElementById("post-form").addEventListener("submit", (event) => {
@@ -1043,6 +1621,8 @@
         renderPosts();
       });
 
+      renderCityTemplateOptions();
+      updateCityTemplate(cityTemplates[0].id);
       renderRankings();
       renderCapitalPlaybooks();
       renderForumOptions();
